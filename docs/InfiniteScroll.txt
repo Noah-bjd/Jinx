@@ -1,0 +1,259 @@
+Sure! Here’s how you can document this code as a tutorial, step by step:
+
+---
+
+# **Creating an Infinite Scrolling Layout with React**
+
+In this tutorial, we will walk through how to create a React application that features infinite scrolling on the right side of the page, with a fixed background image on the left side. We'll use functional components and hooks to manage the scroll behavior and ensure smooth, seamless scrolling.
+
+### **Prerequisites**
+Before starting this tutorial, ensure you have the following:
+- Basic knowledge of React and functional components.
+- Familiarity with React hooks (`useState`, `useRef`, `useCallback`, `useLayoutEffect`).
+- A development environment set up with React (e.g., using Create React App).
+
+---
+
+### **Step 1: Set Up the Project**
+Create a new React project using Create React App if you don’t already have one set up:
+
+```bash
+npx create-react-app infinite-scroll-demo
+cd infinite-scroll-demo
+```
+
+---
+
+### **Step 2: Structure the App**
+
+In this app, we will create two main parts:
+- The left side of the page will contain a fixed image.
+- The right side will display the main content (which we will scroll infinitely).
+
+Let's begin by defining the structure of the `App` component.
+
+1. **Create Components**: In the `src` folder, create a `components` folder and add the following components:
+   - `Hero.js` (or `Hero.tsx` for TypeScript)
+   - `About.js` (or `About.tsx`)
+   - `Projects.js` (or `Projects.tsx`)
+   - `Contact.js` (or `Contact.tsx`)
+
+These components can be simple placeholders for now, like this:
+
+```tsx
+// src/components/Hero.tsx
+const Hero: React.FC = () => {
+  return <div className="section">Hero Section</div>;
+};
+
+export default Hero;
+```
+
+2. **App Component**: Now, update the `App.tsx` to include a structure with a fixed image on the left and scrollable content on the right.
+
+```tsx
+import React from 'react';
+import Hero from './components/Hero';
+import About from './components/About';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import './App.css';
+
+const App: React.FC = () => {
+  return (
+    <div className="container">
+      {/* Left Side: Fixed Image */}
+      <div className="left-side">
+        <img
+          src="https://via.placeholder.com/800x1200" // Replace with your image
+          alt="Fixed Background"
+          className="fixed-image"
+        />
+      </div>
+
+      {/* Right Side: Content */}
+      <div className="right-side">
+        <InfiniteScrollLoop>
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+        </InfiniteScrollLoop>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+```
+
+Here:
+- **Left Side** contains an image.
+- **Right Side** holds the main content, wrapped in the `InfiniteScrollLoop` component (which we’ll define next).
+
+---
+
+### **Step 3: Implement Infinite Scroll Logic**
+
+Now, let's create the `InfiniteScrollLoop` component to manage the infinite scrolling behavior. This component will listen for scroll events, render multiple copies of the content, and ensure smooth scrolling.
+
+#### 3.1: Define the `InfiniteScrollLoop` Component
+
+```tsx
+import React, { useRef, useState, useCallback, useLayoutEffect } from 'react';
+
+const InfiniteScrollLoop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [height, setHeight] = useState<number>(0);
+  const surroundingBackup = 4; // Number of backup copies to render
+  const backupHeight = height * surroundingBackup;
+
+  // Handle scroll events
+  const handleScroll = useCallback(() => {
+    if (scrollRef.current) {
+      const scroll = scrollRef.current.scrollTop;
+      if (scroll < backupHeight || scroll >= backupHeight + height) {
+        scrollRef.current.scrollTop = backupHeight + (scroll % height);
+      }
+    }
+  }, [height, backupHeight]);
+
+  // Handle global scroll events
+  const handleGlobalScroll = useCallback(
+    (event: WheelEvent) => {
+      if (scrollRef.current) {
+        event.preventDefault(); // Prevent default scroll behavior
+        scrollRef.current.scrollTop += event.deltaY; // Adjust scroll position
+        handleScroll(); // Trigger the infinite scroll logic
+      }
+    },
+    [handleScroll]
+  );
+
+  // Set initial height and scroll position
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      setHeight(contentRef.current.offsetHeight); // Set content height
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = backupHeight; // Set initial scroll position
+      }
+    }
+  }, [backupHeight]);
+
+  // Attach global scroll event listener
+  useLayoutEffect(() => {
+    window.addEventListener('wheel', handleGlobalScroll, { passive: false });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('wheel', handleGlobalScroll);
+    };
+  }, [handleGlobalScroll]);
+
+  return (
+    <div
+      className="infinite-scroll-loop-inner"
+      ref={scrollRef}
+      style={{ height: '100vh', overflowY: 'auto' }}
+    >
+      {/* Render surrounding backups */}
+      {Array(surroundingBackup)
+        .fill(null)
+        .map((_, index) => (
+          <div key={`backup-top-${index}`}>{children}</div>
+        ))}
+      {/* Render actual content */}
+      <div ref={contentRef}>{children}</div>
+      {/* Render surrounding backups */}
+      {Array(surroundingBackup)
+        .fill(null)
+        .map((_, index) => (
+          <div key={`backup-bottom-${index}`}>{children}</div>
+        ))}
+    </div>
+  );
+};
+
+export default InfiniteScrollLoop;
+```
+
+Here’s how it works:
+- **useRef** is used to reference both the content and scrollable container.
+- **useState** tracks the height of the content, which is essential for calculating the backup height and smooth scroll transitions.
+- **handleScroll** adjusts the scroll position when necessary.
+- **handleGlobalScroll** listens to mouse wheel events and prevents default scrolling behavior, allowing us to control the scroll position.
+- **useLayoutEffect** sets the initial content height and adds/removes event listeners to manage scrolling.
+
+---
+
+### **Step 4: Add Styles**
+
+For the layout to look good, you need some basic CSS. Create or modify the `App.css` file to achieve the desired layout.
+
+```css
+/* App.css */
+.container {
+  display: flex;
+}
+
+.left-side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100vh;
+}
+
+.fixed-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.right-side {
+  margin-left: 50%;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.infinite-scroll-loop-inner {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.section {
+  padding: 50px;
+  background-color: #f4f4f4;
+  margin: 20px 0;
+}
+```
+
+Here:
+- The `.left-side` contains a fixed image that covers the entire left half of the viewport.
+- The `.right-side` holds the scrolling content.
+- The `.infinite-scroll-loop-inner` is styled to enable vertical scrolling.
+
+---
+
+### **Step 5: Run the App**
+
+Now that everything is set up, start the development server and view the result:
+
+```bash
+npm start
+```
+
+Visit `http://localhost:3000` to see the infinite scrolling effect in action. As you scroll on the right side of the page, you'll notice that the content loops infinitely, while the image on the left stays fixed in place.
+
+---
+
+### **Conclusion**
+
+Congratulations! You've created a React application with an infinite scrolling layout, using a fixed image on the left and scrollable content on the right. You used `useRef`, `useState`, and `useLayoutEffect` hooks to manage the scroll behavior and ensure smooth user interactions.
+
+Feel free to extend this project by adding more content, improving the styling, or customizing the scroll logic further!

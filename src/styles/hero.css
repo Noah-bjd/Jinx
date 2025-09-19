@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 79.3vh; 
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(229, 72, 73, 0.5);
+    color: #090707; 
+  }
+  
+  .hero h1 {
+    font-family: Quattrocento, sans-serif;
+    font-weight: 300;
+    margin: 0;
+  }
+  
+  .hero h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: 'Quattrocento Sans', sans-serif; 
+  }
+
+.logo-container {
+  margin-bottom: 2rem; /* Space between the logo and the text */
+}
+
+.logo {
+  width: 100px; /* Adjust the size of the SVG */
+  height: auto;
+}
+
+  
+h3 {
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+h1, h3 {
+    font-family: Quattrocento, sans-serif;
+    font-weight: 300;
+    margin: 0;
+}
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+@keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .logo {
+    width: 10rem;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translate(4px, 0px);
+    }
+    to {
+      transform: translate(0px, 0px);
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      transform: translate(0px, 0px);
+    }
+    to {
+      transform: translate(25px, 0px);
+    }
+  }
+  
+  .hero h1, .hero h3, .logo-container {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .hero .inactive {
+    animation: slideOut 0.5s forwards;
+  }
+  
+  .hero .active {
+    animation: slideIn 0.5s forwards;
+  }
+  

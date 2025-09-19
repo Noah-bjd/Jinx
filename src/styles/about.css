@@ -1,0 +1,45 @@
+.iconSize {
+    margin-right: 2rem; /* Space between icon and text */
+    vertical-align: middle;
+  }
+
+  h3 {
+    display: block;
+    font-size: 1.9em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+@keyframes slideIn {
+  from {
+    transform: translate(4px, 0px);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(24px, 0px);
+  }
+}
+
+/* Apply transition to each child element */
+h3, .react-icon, .skill-item {
+  transition: transform 0.5s ease-in-out;
+}
+
+.inactive {
+  animation: slideOut 0.7s forwards;
+}
+
+.active {
+  animation: slideIn 0.5s forwards;
+}
