@@ -17,11 +17,11 @@ export default function Preloader() {
   return (
     <div className="preloader">
       <div className="preloader-content">
-        <div className="preloader-logo">
+        {/* <div className="preloader-logo">
           <div className="preloader-logo-inner">
-            <span>RD</span>
+            <span>NB</span>
           </div>
-        </div>
+        </div> */}
         <h2 className="preloader-text">
           <span>{words[currentWordIndex]}</span>
         </h2>
