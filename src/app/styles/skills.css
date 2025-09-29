@@ -1,0 +1,158 @@
+.skills-3d {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  margin: 2rem 0;
+}
+
+.skill-badge {
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid hsl(var(--border));
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.skill-badge:hover::before {
+  left: 100%;
+}
+
+.skill-badge:hover {
+  transform: scale(1.15) translateY(-2px);
+  border-color: hsl(var(--primary));
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(237, 99%, 74%, 0.3);
+}
+
+/* Category-specific colors */
+.skill-badge[data-category="Languages"] {
+  border-left: 3px solid hsl(var(--primary));
+}
+
+.skill-badge[data-category="Frameworks"] {
+  border-left: 3px solid hsl(var(--secondary));
+}
+
+.skill-badge[data-category="Tools"] {
+  border-left: 3px solid hsl(var(--accent));
+}
+
+.skills-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.skills-content {
+  position: relative;
+}
+
+.skills-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: hsl(var(--muted));
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-color.languages {
+  background: hsl(var(--primary));
+}
+
+.legend-color.frameworks {
+  background: hsl(var(--secondary));
+}
+
+.legend-color.tools {
+  background: hsl(var(--accent));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .skills-3d {
+    height: 400px;
+  }
+  
+  .skill-badge {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  
+  .skills-legend {
+    gap: 1rem;
+  }
+  
+  .legend-item {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Section styling */
+.section {
+  padding: 5rem 0;
+  background: hsl(var(--background));
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+}
+
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: hsl(var(--muted-foreground));
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}

@@ -8,7 +8,7 @@ import Preloader from './components/Preloader';
 import Navigation from './components/Navigation';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-
+import SkillsSection from './components/Skills';
 export default function Portfolio() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,7 +25,6 @@ export default function Portfolio() {
       <Head>
         <title>My Portfolio</title>
         <meta name="description" content="Nbouljih" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       
       {isLoading && <Preloader />}
@@ -35,7 +34,8 @@ export default function Portfolio() {
         <main>
           <HeroSection />
           <ProcessSection />
-          <ProjectsSection />
+          {/* <ProjectsSection /> */}
+          <SkillsSection />
           <ContactSection />
         </main>
         <Footer />

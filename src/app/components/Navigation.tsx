@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../styles/navigation.css';
+
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,6 +13,17 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId : any) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav className={`navigation ${isScrolled ? 'navigation-scrolled' : ''}`}>
       <div className="navigation-container">
@@ -23,36 +35,50 @@ export default function Navigation() {
         </div>
         
         <div className="navigation-links">
-          <a href="#work">Work</a>
-          <a href="#process">Process</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+          <a onClick={() => scrollToSection('work')}>Work</a>
+          <a onClick={() => scrollToSection('process')}>Process</a>
+          <a onClick={() => scrollToSection('projects')}>Projects</a>
+          <a onClick={() => scrollToSection('contact')}>Contact</a>
         </div>
 
-        <button 
-          className="navigation-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        
-        <button className="navigation-resume">
-          Resume
-        </button>
+        <div className="navigation-right">
+          <a href="./resume/resume.pdf" download="Noah-Bouljihad-Resume.pdf" className="navigation-resume">
+            Resume
+          </a>
+          
+          <button 
+            className={`navigation-toggle ${isMobileMenuOpen ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
 
-        {isMobileMenuOpen && (
-          <div className="navigation-mobile">
-            <a href="#work">Work</a>
-            <a href="#process">Process</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-            <button className="navigation-resume-mobile">
-              Resume
-            </button>
+        {/* Mobile Menu Overlay */}
+        <div className={`mobile-overlay ${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(false)}></div>
+        
+        {/* Mobile Menu */}
+        <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+          <div className="mobile-menu-header">
+            <span>Menu</span>
+            <button className="mobile-close" onClick={() => setIsMobileMenuOpen(false)}>×</button>
           </div>
-        )}
+          
+          <div className="mobile-menu-content">
+            <a onClick={() => scrollToSection('work')}>Work</a>
+            <a onClick={() => scrollToSection('process')}>Process</a>
+            <a onClick={() => scrollToSection('projects')}>Projects</a>
+            <a onClick={() => scrollToSection('contact')}>Contact</a>
+          </div>
+          
+          <div className="mobile-menu-footer">
+            <a href="./resume/resume.pdf" download="Noah-Bouljihad-Resume.pdf" className="mobile-resume">
+              Download Resume
+            </a>
+          </div>
+        </div>
       </div>
     </nav>
   );

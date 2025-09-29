@@ -19,9 +19,11 @@ export default function HeroSection() {
               I build immersive web experiences with cutting-edge technologies like React, Next.js, and 3D graphics.
             </p>
             <div className="hero-buttons">
-              <button className="btn-primary">
+              <a href="https://github.com/Noah-bjd">
+              <button style={{cursor: 'pointer'}}  className="btn-primary">
                 View Projects
               </button>
+              </a>
               <button className="btn-glass">
                 Contact Me
               </button>
