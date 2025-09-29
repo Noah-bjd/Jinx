@@ -35,9 +35,9 @@ export default function Navigation() {
         </div>
         
         <div className="navigation-links">
-          <a onClick={() => scrollToSection('work')}>Work</a>
+          <a onClick={() => scrollToSection('hero')}>Work</a>
           <a onClick={() => scrollToSection('process')}>Process</a>
-          <a onClick={() => scrollToSection('projects')}>Projects</a>
+          <a onClick={() => scrollToSection('skills')}>Skills</a>
           <a onClick={() => scrollToSection('contact')}>Contact</a>
         </div>
 
@@ -67,9 +67,9 @@ export default function Navigation() {
           </div>
           
           <div className="mobile-menu-content">
-            <a onClick={() => scrollToSection('work')}>Work</a>
+            <a onClick={() => scrollToSection('hero')}>Work</a>
             <a onClick={() => scrollToSection('process')}>Process</a>
-            <a onClick={() => scrollToSection('projects')}>Projects</a>
+            <a onClick={() => scrollToSection('skills')}>Skills</a>
             <a onClick={() => scrollToSection('contact')}>Contact</a>
           </div>
           
