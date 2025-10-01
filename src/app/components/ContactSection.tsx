@@ -1,27 +1,6 @@
-import { useState } from 'react';
 import '../styles/contact.css';
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-  };
-
   return (
     <section id="contact" className="section">
       <div className="container">
@@ -33,9 +12,19 @@ export default function ContactSection() {
             Have a project in mind or want to discuss potential collaboration? I'd love to hear from you.
           </p>
         </div>
-        
+
         <div className="contact-form-container">
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form 
+            className="contact-form"
+            action="https://formsubmit.co/bouljihadnouhaila@gmail.com" 
+            method="POST"
+          >
+            {/* Optional: Disable CAPTCHA */}
+            <input type="hidden" name="_captcha" value="false" />
+
+            {/* Optional: Redirect to thank you page after submission */}
+            <input type="hidden" name="_next" value="http://localhost:3000/Thanks" />
+
             <div className="contact-form-grid">
               <div className="contact-form-group">
                 <label htmlFor="name" className="contact-form-label">Name</label>
@@ -43,8 +32,6 @@ export default function ContactSection() {
                   type="text" 
                   id="name" 
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   className="contact-form-input" 
                   required
                 />
@@ -55,26 +42,24 @@ export default function ContactSection() {
                   type="email" 
                   id="email" 
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   className="contact-form-input" 
                   required
                 />
               </div>
             </div>
+
             <div className="contact-form-group">
               <label htmlFor="message" className="contact-form-label">Message</label>
               <textarea 
                 id="message" 
                 name="message"
                 rows={5} 
-                value={formData.message}
-                onChange={handleChange}
                 className="contact-form-textarea"
                 required
               ></textarea>
             </div>
-            <button type="submit" className="contact-form-button">Send Message</button>
+
+            <button type="submit" className="mt-[1.2rem] contact-form-button">Send Message</button>
           </form>
         </div>
       </div>

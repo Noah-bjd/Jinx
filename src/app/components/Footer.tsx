@@ -5,12 +5,11 @@ export default function Footer() {
         <div className="container">
           <div className="footer-content">
             <p className="footer-copyright">
-              © {new Date().getFullYear()} React Developer Portfolio. All rights reserved.
+              © {new Date().getFullYear()} Noah's Portfolio. Feel free to connect!
             </p>
             <div className="footer-links">
-              <a href="#" className="footer-link">Privacy Policy</a>
-              <a href="#" className="footer-link">Resume</a>
-              <a href="#" className="footer-link">GitHub</a>
+              <a  href="https://www.linkedin.com/in/nouhaila-bouljihad-255b36234/" className="footer-link">Linkedin</a>
+              <a href="https://github.com/Noah-bjd" className="footer-link">GitHub</a>
             </div>
           </div>
         </div>

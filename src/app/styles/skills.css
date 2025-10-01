@@ -86,8 +86,8 @@
 }
 
 .skill-badge.active[data-category="Tools"] {
-  background: hsl(var(--accent)) !important;
-  border-color: hsl(var(--accent)) !important;
+  background:white!important;
+  border-color: black !important;
 }
 
 .skills-header {
@@ -112,7 +112,6 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1.5rem;
-  background: hsl(var(--muted));
   border-radius: 12px;
   font-size: 0.95rem;
   font-weight: 500;
@@ -152,7 +151,7 @@
 
 .legend-item.active[data-category="Tools"],
 .legend-item.active:has(.legend-color.tools) {
-  border-color: hsl(var(--accent)) !important;
+  border-color:white !important;
   box-shadow: 0 8px 25px hsla(var(--accent), 0.4) !important;
   background: hsla(var(--accent), 0.1) !important;
 }
@@ -181,7 +180,7 @@
 }
 
 .legend-color.tools {
-  background: hsl(var(--accent));
+  background:white;
   box-shadow: 0 0 15px hsl(var(--accent));
 }
 
