@@ -336,6 +336,8 @@ export default function SkillsSection() {
                 minPolarAngle={0}
                 enablePan={false}
                 target={[0, 0, 0]}
+                minDistance={5}    // Added min zoom distance
+                maxDistance={15}   // Added max zoom distance
               />
 
               {/* Background Stars */}

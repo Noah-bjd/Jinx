@@ -33,9 +33,9 @@ export default function Portfolio() {
         <Navigation />
         <main>
           <HeroSection />
+          <SkillsSection />
           <ProcessSection />
           {/* <ProjectsSection /> */}
-          <SkillsSection />
           <ContactSection />
         </main>
         <Footer />

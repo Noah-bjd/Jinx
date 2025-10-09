@@ -1,71 +1,614 @@
-/* Process Section */
+/* Process Section - Professional Timeline Layout */
+.process-section {
+  position: relative;
+  padding: 6rem 1rem;
+  background: linear-gradient(135deg, hsl(var(--background)) 0%, rgba(255, 255, 255, 0.02) 100%);
+  overflow: hidden;
+}
 
-  
-  .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
+.process-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-description {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: hsl(var(--muted-foreground));
+  max-width: 56rem;
+  margin: 0 auto;
+  line-height: 1.7;
+  padding: 0 1rem;
+}
+
+/* Timeline Layout */
+.process-timeline {
+  position: relative;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 3rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    hsl(var(--primary)),
+    hsl(var(--primary)),
+    transparent
+  );
+  transform-origin: top;
+}
+
+.process-steps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.step-object {
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  background: transparent !important;
+}
+
+.step-connector {
+  width: 2px;
+  height: 3rem;
+  background: linear-gradient(180deg, hsl(var(--primary)), transparent);
+  opacity: 0.6;
+}
+
+/* Step Content */
+.step-content {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin-top: 0.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.process-step:hover .step-content {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(0.5rem);
+  box-shadow: 
+    0 20px 40px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.step-number {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: hsl(var(--primary));
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.step-title {
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.step-description {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.7;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  margin-bottom: 2rem;
+}
+
+.step-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.feature-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: hsl(var(--muted-foreground));
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.feature-tag:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: hsl(var(--foreground));
+  transform: translateY(-2px);
+}
+
+/* CTA Section */
+.process-cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.process-cta p {
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 2rem;
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  font-weight: 500;
+  padding: 0 1rem;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, #ec4899 100%);
+  color: white;
+  border: none;
+  padding: 1.25rem 3rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 15px 35px -10px hsl(var(--primary)),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.cta-button:hover {
+  box-shadow: 
+    0 25px 50px -10px hsl(var(--primary)),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Contextual 3D Objects */
+
+/* Phase 1: Discover & Research - Magnifying Glass */
+.research-object {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magnifying-glass {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  transform-style: preserve-3d;
+}
+
+.glass-lens {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: transparent;
+  top: 0;
+  left: 0;
+}
+
+.glass-handle {
+  position: absolute;
+  width: 15px;
+  height: 3px;
+  background: white;
+  top: 20px;
+  left: 20px;
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+
+.search-reflection {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid white;
+  border-radius: 50%;
+  top: 6px;
+  left: 6px;
+  opacity: 0.6;
+}
+
+/* Phase 2: Design & Prototype - Design Tools */
+.design-object {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Design Canvas */
+.design-canvas {
+  position: absolute;
+  width: 35px;
+  height: 25px;
+  border: 2px solid white;
+  background: transparent;
+  transform: perspective(500px) rotateX(5deg) rotateY(5deg);
+}
+
+.canvas-elements {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+}
+
+.canvas-header {
+  height: 4px;
+  border: 1px solid white;
+  margin-bottom: 2px;
+  background: transparent;
+}
+
+.canvas-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  height: 12px;
+}
+
+.content-block {
+  border: 1px solid white;
+  background: transparent;
+  opacity: 0.7;
+}
+
+/* Design Tools */
+.design-tools {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.pen-tool {
+  width: 2px;
+  height: 10px;
+  background: white;
+  transform: rotate(45deg);
+  position: relative;
+}
+
+.pen-tip {
+  position: absolute;
+  top: -2px;
+  left: -1px;
+  width: 0;
+  height: 0;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 3px solid white;
+}
+
+.color-palette {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+}
+
+.palette-color {
+  width: 3px;
+  height: 3px;
+  border: 1px solid white;
+}
+
+/* Phase 3: Develop & Launch - Development Tools */
+.develop-object {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Code Editor */
+.code-editor {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  border: 2px solid white;
+  background: transparent;
+  transform: perspective(500px) rotateX(-5deg) rotateY(5deg);
+}
+
+.editor-header {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  height: 3px;
+  background: white;
+  opacity: 0.8;
+}
+
+.editor-content {
+  position: absolute;
+  top: 8px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.code-line {
+  height: 1px;
+  background: white;
+  opacity: 0.7;
+}
+
+.code-line-1 { width: 100%; }
+.code-line-2 { width: 85%; margin-left: 5px; }
+.code-line-3 { width: 90%; }
+.code-line-4 { width: 75%; margin-left: 5px; }
+
+/* Deployment */
+.deployment {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.server-icon {
+  width: 8px;
+  height: 6px;
+  border: 1px solid white;
+  position: relative;
+}
+
+.server-lights {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: flex;
+  gap: 1px;
+}
+
+.server-light {
+  width: 1px;
+  height: 1px;
+  background: white;
+  opacity: 0.7;
+}
+
+.deploy-arrow {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  width: 8px;
+  height: 6px;
+}
+
+.arrow-shaft {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: white;
+}
+
+.arrow-head {
+  position: absolute;
+  right: 0;
+  top: 1px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid white;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .process-section {
+    padding: 4rem 1rem;
   }
   
-  .section-title {
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+  .process-timeline {
+    padding-left: 2rem;
   }
   
-  .section-description {
-    font-size: 1.125rem;
-    color: hsl(var(--muted-foreground));
-    max-width: 42rem;
-    margin: 0 auto;
-    line-height: 1.6;
+  .timeline-line {
+    left: 2.5rem;
   }
   
-  .process-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .process-step {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
-  @media (min-width: 768px) {
-    .process-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-    }
+  .step-indicator {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
   }
   
-  .process-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    transition: all 0.4s ease;
-  }
-  
-  .process-card:hover {
-    transform: translateY(-0.75rem);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .process-icon {
+  .step-object {
     width: 4rem;
     height: 4rem;
-    border-radius: 9999px;
-    background-color: hsl(var(--primary));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
   }
   
-  .process-step-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+  .step-connector {
+    width: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--primary)), transparent);
   }
   
-  .process-step-description {
-    color: hsl(var(--muted-foreground));
-    line-height: 1.6;
+  .step-content {
+    margin-top: 0;
+    margin-left: 5rem;
+    padding: 1.5rem;
   }
+  
+  /* Adjust 3D objects for mobile */
+  .magnifying-glass {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .glass-lens {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .design-canvas,
+  .code-editor {
+    transform: perspective(300px) rotateX(5deg) rotateY(-2deg);
+    width: 32px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-section {
+    padding: 3rem 0.5rem;
+  }
+  
+  .process-timeline {
+    padding-left: 1rem;
+  }
+  
+  .timeline-line {
+    left: 2rem;
+  }
+  
+  .step-content {
+    margin-left: 4rem;
+    padding: 1.25rem;
+  }
+  
+  .step-object {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  
+  .process-steps {
+    gap: 2.5rem;
+  }
+  
+  /* Further adjust 3D objects for small mobile */
+  .magnifying-glass {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .glass-lens {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .glass-handle {
+    width: 12px;
+    top: 15px;
+    left: 15px;
+  }
+  
+  .design-canvas,
+  .code-editor {
+    width: 28px;
+    height: 21px;
+    transform: none;
+  }
+  
+  .canvas-content {
+    gap: 0.5px;
+  }
+  
+  .editor-content {
+    gap: 1px;
+  }
+}
