@@ -24,9 +24,11 @@ export default function HeroSection() {
                 View Projects
               </button>
               </a>
-              <button className="btn-glass">
-                Contact Me
-              </button>
+              <a href="#contact">
+                <button style={{cursor: 'pointer'}}  className="btn-glass">
+                  Contact Me
+                </button>
+              </a>
             </div>
           </div>
           

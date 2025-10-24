@@ -1,7 +1,7 @@
 // SkillsSection.tsx
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Html, Stars } from '@react-three/drei';
-import { useRef, useState } from 'react';
+import { act, useRef, useState } from 'react';
 import { Group, Mesh } from 'three';
 import '../styles/skills.css';
 
@@ -41,7 +41,7 @@ function SkillOrbit({
       groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.1 * speed;
     }
   });
-
+  
   return (
     <group ref={groupRef}>
       {items.map((skill, i) => {
@@ -49,10 +49,11 @@ function SkillOrbit({
         const x = radius * Math.cos(angle);
         const z = radius * Math.sin(angle);
         const category = getSkillCategory(skill);
-
+        const isHighlighted = activeCategory === category;
         return (
           <mesh key={skill} position={[x, 0, z]}>
-            <Html center>
+            <Html center
+              zIndexRange={isHighlighted ? [100, 101] : [50, 51]}>
               <div 
                 className={`skill-badge ${activeCategory === category ? 'active' : ''}`}
                 data-category={category}
@@ -291,7 +292,7 @@ export default function SkillsSection() {
       <div className="container">
         <div className="skills-header">
           <h2 className="section-title">
-            My <span className="text-primary">Skills</span>
+            My <span className="text-gradient">Skills</span>
           </h2>
           <p className="section-description">
             {activeCategory 
@@ -336,6 +337,8 @@ export default function SkillsSection() {
                 minPolarAngle={0}
                 enablePan={false}
                 target={[0, 0, 0]}
+                minDistance={5}    // Added min zoom distance
+                maxDistance={15}   // Added max zoom distance
               />
 
               {/* Background Stars */}
