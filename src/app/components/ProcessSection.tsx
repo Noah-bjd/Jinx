@@ -47,7 +47,7 @@ export default function ProcessSection() {
       x: 0,
       transition: {
         duration: 0.7,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
