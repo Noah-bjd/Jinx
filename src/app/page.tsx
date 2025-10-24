@@ -10,23 +10,23 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import SkillsSection from './components/Skills';
 export default function Portfolio() {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   
-  useEffect(() => {
-    // Simulate loading time (adjust as needed)
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      // Add class to body to trigger animations
-      document.body.classList.add('hero-loaded');
-    }, 3000); // Match this with your preloader duration
+  // useEffect(() => {
+  //   // Simulate loading time (adjust as needed)
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //     // Add class to body to trigger animations
+  //     document.body.classList.add('hero-loaded');
+  //   }, 3000); // Match this with your preloader duration
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  if (isLoading) {
-    return <Preloader />;
-  }
+  // if (isLoading) {
+  //   return <Preloader />;
+  // }
 
   return (
     <>
@@ -34,8 +34,8 @@ export default function Portfolio() {
         <title>My Portfolio</title>
         <meta name="description" content="Nbouljih" />
       </Head>
-            
-      <div className={`portfolio-container ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+
+      <div className={`portfolio-container opacity-100`}>
         <Navigation />
         <main>
           <HeroSection />
