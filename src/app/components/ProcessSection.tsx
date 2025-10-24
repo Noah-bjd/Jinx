@@ -439,23 +439,6 @@ export default function ProcessSection() {
             ))}
           </motion.div>
         </div>
-
-        <motion.div 
-          className="process-cta"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <p>Ready to transform your vision into reality?</p>
-          <motion.button
-            className="cta-button"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Start Your Project
-          </motion.button>
-        </motion.div>
       </div>
     </section>
   );

@@ -103,6 +103,11 @@
   font-weight: 500;
   transition: all 0.2s ease;
 }
+.btn-glass:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
 
 .hero-spline {
   position: relative;
@@ -116,7 +121,6 @@
   height: 4rem;
   border-radius: 0.75rem;
   background: linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--secondary)));
-  animation: floating 8s ease-in-out infinite;
 }
 
 .floating-object-2 {
@@ -127,8 +131,6 @@
   height: 3rem;
   border-radius: 9999px;
   background: linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--secondary)));
-  animation: floating 10s ease-in-out infinite;
-  animation-delay: 2s;
 }
 
 .floating-object-3 {
@@ -139,8 +141,6 @@
   height: 3.5rem;
   border-radius: 0.5rem;
   background: linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--accent)));
-  animation: floating 12s ease-in-out infinite;
-  animation-delay: 4s;
 }
 
 @media (min-width: 640px) {
@@ -157,5 +157,116 @@
   .floating-object-3 {
     width: 4.5rem;
     height: 4.5rem;
+  }
+}
+
+/* Animation Classes - Add these classes after preloader finishes */
+.hero-loaded #hero {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+.hero-loaded .hero-title {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.hero-loaded .hero-description {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out 0.7s forwards;
+}
+
+.hero-loaded .hero-buttons {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out 0.9s forwards;
+}
+
+.hero-loaded .hero-spline {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  animation: fadeInScale 1s ease-out 1.1s forwards;
+}
+
+.hero-loaded .floating-object-1 {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1.3s forwards, floating 8s ease-in-out infinite 1.3s;
+}
+
+.hero-loaded .floating-object-2 {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1.5s forwards, floating 10s ease-in-out infinite 1.5s;
+}
+
+.hero-loaded .floating-object-3 {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1.7s forwards, floating 12s ease-in-out infinite 1.7s;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-2deg);
+  }
+}
+
+/* Optional: Add smooth scroll behavior for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .hero-loaded #hero,
+  .hero-loaded .hero-title,
+  .hero-loaded .hero-description,
+  .hero-loaded .hero-buttons,
+  .hero-loaded .hero-spline,
+  .hero-loaded .floating-object-1,
+  .hero-loaded .floating-object-2,
+  .hero-loaded .floating-object-3 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

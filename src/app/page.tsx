@@ -12,13 +12,21 @@ import SkillsSection from './components/Skills';
 export default function Portfolio() {
   const [isLoading, setIsLoading] = useState(true);
 
+  
   useEffect(() => {
+    // Simulate loading time (adjust as needed)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
-    
+      // Add class to body to trigger animations
+      document.body.classList.add('hero-loaded');
+    }, 3000); // Match this with your preloader duration
+
     return () => clearTimeout(timer);
   }, []);
+
+  if (isLoading) {
+    return <Preloader />;
+  }
 
   return (
     <>
@@ -26,9 +34,7 @@ export default function Portfolio() {
         <title>My Portfolio</title>
         <meta name="description" content="Nbouljih" />
       </Head>
-      
-      {isLoading && <Preloader />}
-      
+            
       <div className={`portfolio-container ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Navigation />
         <main>

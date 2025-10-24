@@ -29,7 +29,7 @@ export default function Navigation() {
       <div className="navigation-container">
         <div className="navigation-brand">
           <div className="navigation-logo">
-            <span>NB</span>
+            <img src="/assets/shipit.png" width={65} height={65} alt="Logo" />
           </div>
           <span className="navigation-name">Noah-bjd</span>
         </div>
